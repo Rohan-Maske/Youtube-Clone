@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Clone</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        body {
+            background-color: #f9f9f9;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            color: #FF0000;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .auth-button {
+            background-color: #065fd4;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .video-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 2rem;
+            gap: 1rem;
+        }
+        .video-card {
+            width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .thumbnail {
+            width: 100%;
+            height: 168px;
+            object-fit: cover;
+        }
+        .video-info {
+            padding: 1rem;
+        }
+        .video-title {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        .channel-name, .video-stats {
+            font-size: 14px;
+            color: #606060;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">YouTube</div>
+        <button class="auth-button" onclick="location.href='signin-signup page.html'">Sign Up / Sign In</button>
+    </header>
+    
+    <div class="video-container">
+        <!-- Video cards will be dynamically inserted here -->
+    </div>
+
+    <script>
+        const videoContainer = document.querySelector('.video-container');
+        
+        // Function to create a video card
+        function createVideoCard(title, channel, views, timestamp, thumbnailUrl) {
+            const card = document.createElement('div');
+            card.className = 'video-card';
+            card.innerHTML = `
+                <img src="${thumbnailUrl}" alt="${title}" class="thumbnail">
+                <div class="video-info">
+                    <h3 class="video-title">${title}</h3>
+                    <p class="channel-name">${channel}</p>
+                    <p class="video-stats">${views} views • ${timestamp}</p>
+                </div>
+            `;
+            return card;
+        }
+
+        // Generate 40 video cards
+        for (let i = 1; i <= 40; i++) {
+            const title = `Video Title ${i}`;
+            const channel = `Channel ${i}`;
+            const views = Math.floor(Math.random() * 1000000) + 1000;
+            const timestamp = `${Math.floor(Math.random() * 12) + 1} months ago`;
+            const thumbnailUrl = `https://picsum.photos/300/168?random=${i}`;
+
+            const videoCard = createVideoCard(title, channel, views, timestamp, thumbnailUrl);
+            videoContainer.appendChild(videoCard);
+        }
+    </script>
+</body>
+</html>
